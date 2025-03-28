@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://c14kea16qnnef"]
+
+[ext_resource type="Script" path="res://damage_number.gd" id="1_bnwxo"]
+[ext_resource type="Texture2D" uid="uid://cquqk7qq7rbso" path="res://scenes/game_object/dmgnumber/dmgnumber3.png" id="2_a1okh"]
+[ext_resource type="Texture2D" uid="uid://p6ppnu1ntx7k" path="res://scenes/game_object/dmgnumber/crit.png" id="3_fi13w"]
+[ext_resource type="AudioStream" uid="uid://b8bjdj7x1xiit" path="res://scenes/game_object/player/pigman/random.wav" id="4_6f07b"]
+[ext_resource type="AudioStream" uid="uid://dthfc5a5v055p" path="res://scenes/game_object/basic_enemy/rogue/hitHurt.wav" id="5_tuup4"]
+
+[node name="DamageNumber" type="Node2D"]
+script = ExtResource("1_bnwxo")
+digit_spritesheet = ExtResource("2_a1okh")
+crit_bg = ExtResource("3_fi13w")
+export_crit_sfx = ExtResource("4_6f07b")
+export_non_crit_sfx = ExtResource("5_tuup4")

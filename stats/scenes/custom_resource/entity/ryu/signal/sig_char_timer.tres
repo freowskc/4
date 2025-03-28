@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PartResource" load_steps=3 format=3 uid="uid://knq322mnv0jq"]
+
+[ext_resource type="Texture2D" uid="uid://cvrv66jdhb4jr" path="res://scenes/custom_resource/entity/ryu/signal/sig1.png" id="1_ds06m"]
+[ext_resource type="Script" path="res://scenes/custom_resource/entity/part_res.gd" id="1_n55q5"]
+
+[resource]
+script = ExtResource("1_n55q5")
+icon = ExtResource("1_ds06m")
+type = 0
+signal_name = "char_timer"
+on_state = "-"
+to_state = "-"
+description = "emit every char_timer
+run out"

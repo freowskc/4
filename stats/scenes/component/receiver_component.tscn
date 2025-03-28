@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkoo3i3djfh0q"]
+
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/ReceiverController.gd" id="1_5lh1l"]
+[ext_resource type="PackedScene" uid="uid://esxoqn07bwbk" path="res://scenes/game_object/dmgnumber/dmg_popup.tscn" id="2_oruc6"]
+
+[node name="ReceiverController" type="Node"]
+script = ExtResource("1_5lh1l")
+damage_popup = ExtResource("2_oruc6")

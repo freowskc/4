@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7dh7tseol6j0"]
+
+[ext_resource type="Script" path="res://scenes/autoload/game_events.gd" id="1_gigr3"]
+[ext_resource type="Resource" uid="uid://cq2psptrdk74w" path="res://scenes/custom_resource/signal_temp_res.tres" id="2_vbbp3"]
+
+[node name="SignalEvents" type="Node"]
+script = ExtResource("1_gigr3")
+signal_lists_resource = ExtResource("2_vbbp3")

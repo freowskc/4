@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://r1jdi0eveocl"]
+
+[ext_resource type="Script" path="res://scenes/manager/enemy_manager.gd" id="1_ds3rj"]
+[ext_resource type="PackedScene" uid="uid://cgq0hfym3lpxh" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="2_8pgdy"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_ds3rj")
+basic_enemy_scene = ExtResource("2_8pgdy")
+
+[node name="forRespawn" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Anchor" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="EnemyMarkerP1" type="Marker2D" parent="Anchor"]
+position = Vector2(350, 200)
+
+[node name="EnemyMarkerP2" type="Marker2D" parent="Anchor"]
+position = Vector2(400, 130)
+
+[node name="EnemyMarkerP3" type="Marker2D" parent="Anchor"]
+position = Vector2(450, 200)
+
+[node name="EnemyMarkerP4" type="Marker2D" parent="Anchor"]
+position = Vector2(500, 130)
+
+[node name="EnemyPlaceHolder" type="Node" parent="."]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn2xoo3khgxdi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtq0s"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5xto"]
+size = Vector2(20, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcq5c"]
+size = Vector2(17, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_488vp"]
+size = Vector2(17, 22)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="idle" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -16)
+shape = SubResource("RectangleShape2D_rtq0s")
+disabled = true
+one_way_collision_margin = 0.0
+
+[node name="run&attack" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_p5xto")
+disabled = true
+
+[node name="duck" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -11.5)
+shape = SubResource("RectangleShape2D_pcq5c")
+disabled = true
+
+[node name="jump" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -18)
+shape = SubResource("RectangleShape2D_488vp")

@@ -1,0 +1,215 @@
+[gd_scene load_steps=19 format=3 uid="uid://dfux5vo7xlllq"]
+
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/base_unit/StateMachine.gd" id="1_70y8v"]
+[ext_resource type="Script" path="res://scenes/game_object/player/pigman/pigman.gd" id="1_gviu3"]
+[ext_resource type="Texture2D" uid="uid://djf0grx2ikyj2" path="res://scenes/game_object/player/pigman/pigman.png" id="2_jgtrs"]
+[ext_resource type="Resource" uid="uid://cgcq5rx3po7d7" path="res://scenes/game_object/player/priest/prieststat.tres" id="2_vvmxi"]
+[ext_resource type="Script" path="res://scenes/game_object/player/pigman/node.gd" id="3_mk16c"]
+[ext_resource type="Script" path="res://scenes/game_object/player/pigman/attack.gd" id="4_lh1dy"]
+[ext_resource type="Script" path="res://scenes/game_object/player/pigman/get_dmg.gd" id="5_8imml"]
+[ext_resource type="PackedScene" uid="uid://esxoqn07bwbk" path="res://scenes/game_object/dmgnumber/dmg_popup.tscn" id="7_sbnrg"]
+[ext_resource type="Script" path="res://receiver_component_2.gd" id="8_kdod4"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="10_n6rua"]
+[ext_resource type="AudioStream" uid="uid://b8bjdj7x1xiit" path="res://scenes/game_object/player/pigman/random.wav" id="11_2iks2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wvsr"]
+size = Vector2(20, 44)
+
+[sub_resource type="Animation" id="Animation_s8gix"]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cwmds"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uxp64"]
+resource_name = "charge"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_860ep"]
+resource_name = "get_damage"
+length = 0.31
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gqxrn"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 7), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s03d"]
+_data = {
+"RESET": SubResource("Animation_s8gix"),
+"attack": SubResource("Animation_cwmds"),
+"charge": SubResource("Animation_uxp64"),
+"get_damage": SubResource("Animation_860ep"),
+"walk": SubResource("Animation_gqxrn")
+}
+
+[node name="Pigman" type="CharacterBody2D"]
+script = ExtResource("1_gviu3")
+stat = ExtResource("2_vvmxi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_8wvsr")
+
+[node name="StateMachine2" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_70y8v")
+initial_state = NodePath("PigmanWalk")
+
+[node name="PigmanWalk" type="Node" parent="StateMachine2"]
+script = ExtResource("3_mk16c")
+state_type = "walk"
+
+[node name="PigmanAttack" type="Node" parent="StateMachine2"]
+script = ExtResource("4_lh1dy")
+state_type = "attack"
+
+[node name="PigmanGetDMG" type="Node" parent="StateMachine2"]
+script = ExtResource("5_8imml")
+state_type = "get_dmg"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("2_jgtrs")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_6s03d")
+}
+
+[node name="ReceiverComponent2" type="Node" parent="." node_paths=PackedStringArray("state_machine_component", "state", "health_component")]
+script = ExtResource("8_kdod4")
+state_machine_component = NodePath("../StateMachine2")
+state = NodePath("../StateMachine2/PigmanGetDMG")
+health_component = NodePath("../HealthComponent")
+damage_popup = ExtResource("7_sbnrg")
+
+[node name="HealthComponent" parent="." instance=ExtResource("10_n6rua")]
+max_health = 200.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_2iks2")

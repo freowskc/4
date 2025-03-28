@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dphyt06ysjisc"]
+
+[ext_resource type="Script" path="res://scenes/ability/rogue_ability_controller/rogue_ability_controller.gd" id="1_6x8vo"]
+[ext_resource type="PackedScene" uid="uid://cpcxq0lohy8w" path="res://scenes/ability/rogue_ability/rogue_ability.tscn" id="2_i5cvg"]
+
+[node name="AbilityController" type="Node"]
+script = ExtResource("1_6x8vo")
+rogue_ability = ExtResource("2_i5cvg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true

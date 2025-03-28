@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://bf3imeuihexj2"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/player_rogue.gd" id="1_l2p5p"]
+[ext_resource type="PackedScene" uid="uid://bi3p7qdvelg83" path="res://scenes/animation/anim_ryu.tscn" id="2_j6b88"]
+[ext_resource type="Script" path="res://scenes/game_object/player/AttackAbilityController.gd" id="2_peoil"]
+[ext_resource type="Script" path="res://scenes/states/state_rogue_idle.gd" id="5_1jxkl"]
+[ext_resource type="Script" path="res://scenes/game_object/player/State Machine.gd" id="5_a1wog"]
+[ext_resource type="Script" path="res://scenes/states/state_rogue_attack.gd" id="6_50ik8"]
+[ext_resource type="Script" path="res://scenes/states/state_rogue_crit.gd" id="6_d6w6a"]
+[ext_resource type="Script" path="res://scenes/states/state_rogue_wander.gd" id="7_yep6d"]
+[ext_resource type="Script" path="res://scenes/game_object/player/RogueGetDamage.gd" id="8_s423j"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="10_bmnld"]
+[ext_resource type="Script" path="res://scenes/game_object/player/random.gd" id="12_q2sss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a04sm"]
+size = Vector2(15, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfscx"]
+size = Vector2(16, 32)
+
+[node name="PlayerRogue" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+script = ExtResource("1_l2p5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_a04sm")
+
+[node name="AbilityManager" type="Node" parent="."]
+
+[node name="AttackAbilityController" type="Node" parent="AbilityManager"]
+script = ExtResource("2_peoil")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_a1wog")
+initial_state = NodePath("RogueIdle")
+
+[node name="RogueIdle" type="Node" parent="StateMachine"]
+script = ExtResource("5_1jxkl")
+state_type = "rogue_idle"
+
+[node name="RogueAttack" type="Node" parent="StateMachine"]
+script = ExtResource("6_50ik8")
+state_type = "rogue_attack"
+
+[node name="RogueCrit" type="Node" parent="StateMachine"]
+script = ExtResource("6_d6w6a")
+state_type = "rogue_crit"
+
+[node name="RogueWander" type="Node" parent="StateMachine"]
+script = ExtResource("7_yep6d")
+state_type = "rogue_wander"
+
+[node name="RogueGetDamage" type="Node" parent="StateMachine"]
+script = ExtResource("8_s423j")
+state_type = "rogue_get_damage"
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("10_bmnld")]
+health_bar = NodePath("../ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="AnimRyuComponent" parent="." instance=ExtResource("2_j6b88")]
+unique_name_in_owner = true
+
+[node name="Random" type="Timer" parent="."]
+autostart = true
+script = ExtResource("12_q2sss")
+
+[node name="Area2D" type="Area2D" parent="." groups=["ryu_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_kfscx")
+
+[connection signal="timeout" from="Random" to="Random" method="_on_timeout"]

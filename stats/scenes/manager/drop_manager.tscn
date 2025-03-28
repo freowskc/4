@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3blvonxcc2sa"]
+
+[ext_resource type="Script" path="res://scenes/manager/drop_manager.gd" id="1_oxtln"]
+
+[node name="DropManager" type="Node"]
+script = ExtResource("1_oxtln")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PartResource" load_steps=3 format=3 uid="uid://cxes6n5f2vufn"]
+
+[ext_resource type="Texture2D" uid="uid://cvbqp8rrhfk0r" path="res://scenes/custom_resource/entity/ryu/state_to/to1.png" id="1_uay8y"]
+[ext_resource type="Script" path="res://scenes/custom_resource/entity/part_res.gd" id="1_wcdi5"]
+
+[resource]
+script = ExtResource("1_wcdi5")
+icon = ExtResource("1_uay8y")
+type = 2
+signal_name = "-"
+on_state = "-"
+to_state = "rogue_idle"
+description = "to idle state"

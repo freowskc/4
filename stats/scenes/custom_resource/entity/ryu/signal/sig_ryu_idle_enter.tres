@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PartResource" load_steps=3 format=3 uid="uid://c5hb0lw7dr265"]
+
+[ext_resource type="Texture2D" uid="uid://cvrv66jdhb4jr" path="res://scenes/custom_resource/entity/ryu/signal/sig1.png" id="1_cply5"]
+[ext_resource type="Script" path="res://scenes/custom_resource/entity/part_res.gd" id="2_85xna"]
+
+[resource]
+script = ExtResource("2_85xna")
+icon = ExtResource("1_cply5")
+type = 0
+signal_name = "char_idle_enter"
+on_state = "-"
+to_state = "-"
+description = "emit signal when
+character enter idle state"

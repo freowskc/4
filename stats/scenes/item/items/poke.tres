@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cfwsaw0lrtw0o"]
+
+[ext_resource type="Script" path="res://scenes/item/item_data.gd" id="1_fvdxf"]
+[ext_resource type="Texture2D" uid="uid://dt8w2my0jdf4i" path="res://scenes/item/weapons.png" id="2_5u0qf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xde7k"]
+atlas = ExtResource("2_5u0qf")
+region = Rect2(240, 0, 24, 24)
+
+[resource]
+script = ExtResource("1_fvdxf")
+name = "Poke"
+description = "pokekeke"
+stackable = false
+texture = SubResource("AtlasTexture_xde7k")
+attack = 16
+defense = 3
+health = 4
+attack_speed = 0

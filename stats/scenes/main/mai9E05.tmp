@@ -1,0 +1,86 @@
+[gd_scene load_steps=16 format=3 uid="uid://dj8ffvqulh7m4"]
+
+[ext_resource type="PackedScene" uid="uid://bf3imeuihexj2" path="res://scenes/game_object/player/player_rogue.tscn" id="1_pnm5d"]
+[ext_resource type="PackedScene" uid="uid://dbhti4rwpkth8" path="res://scenes/ui/arena_time_ui.tscn" id="1_qf7un"]
+[ext_resource type="Texture2D" uid="uid://cdbuwgqhpyqq1" path="res://scenes/main/NES - Ninja Gaiden 2 The Dark Sword of Chaos - Boss Rooms.png" id="1_scb5b"]
+[ext_resource type="PackedScene" uid="uid://y1i3iidd6taw" path="res://scenes/manager/arena_time_manager.tscn" id="2_133vt"]
+[ext_resource type="PackedScene" uid="uid://r1jdi0eveocl" path="res://scenes/manager/enemy_manager.tscn" id="3_ujf4l"]
+[ext_resource type="PackedScene" uid="uid://3blvonxcc2sa" path="res://scenes/manager/drop_manager.tscn" id="4_w75r7"]
+[ext_resource type="Script" path="res://scenes/main/InventoryInterface.gd" id="7_kycc0"]
+[ext_resource type="PackedScene" uid="uid://dyno2jr0rmxjv" path="res://scenes/inventory/inventory.tscn" id="7_tuc0b"]
+[ext_resource type="Resource" uid="uid://cyqossvtij5tj" path="res://scenes/custom_resource/inventory/test_inv.tres" id="9_l6gyn"]
+[ext_resource type="PackedScene" uid="uid://dgb7sdw30dbwg" path="res://scenes/inventory/slot.tscn" id="10_nramp"]
+[ext_resource type="PackedScene" uid="uid://dt0bufvnq3oe8" path="res://scenes/game_object/basic_enemy/gengger/gengger.tscn" id="11_jkavp"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/base_unit/base_unit.gd" id="12_nxrr7"]
+[ext_resource type="PackedScene" uid="uid://cfl316tfqks2j" path="res://scenes/game_object/basic_enemy/test/character_body_2d.tscn" id="13_prdpq"]
+[ext_resource type="PackedScene" uid="uid://i6pxmecb05qu" path="res://scenes/game_object/basic_enemy/test/testtt.tscn" id="14_yn4e0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddifu"]
+size = Vector2(34, 10)
+
+[node name="Main" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(127, 99)
+texture = ExtResource("1_scb5b")
+hframes = 3
+vframes = 4
+frame = 6
+
+[node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("1_qf7un")]
+arena_time_manager = NodePath("../ArenaTimeManager")
+
+[node name="ArenaTimeManager" parent="." instance=ExtResource("2_133vt")]
+
+[node name="EnemyManager" parent="." instance=ExtResource("3_ujf4l")]
+
+[node name="DropManager" parent="." instance=ExtResource("4_w75r7")]
+
+[node name="Player" parent="." instance=ExtResource("1_pnm5d")]
+position = Vector2(181, 111)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(80, 96)
+shape = SubResource("RectangleShape2D_ddifu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(224, 176, 224, 0, 272, 0, 272, 192, -8, 192, -8, 0, 32, 0, 32, 176)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("7_kycc0")
+
+[node name="Inventory" parent="UI/InventoryInterface" instance=ExtResource("7_tuc0b")]
+layout_mode = 0
+offset_left = -90.0
+offset_right = -6.0
+inv_data = ExtResource("9_l6gyn")
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("10_nramp")]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -282.0
+offset_top = 16.0
+offset_right = -266.0
+offset_bottom = 32.0
+
+[node name="BaseUnit" parent="." instance=ExtResource("11_jkavp")]
+position = Vector2(129, 134)
+script = ExtResource("12_nxrr7")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("13_prdpq")]
+position = Vector2(142, 76)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("14_yn4e0")]
+position = Vector2(86, 145)

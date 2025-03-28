@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqhgqvyb73d3a"]
+
+[ext_resource type="PackedScene" uid="uid://cv4uktrp44a2u" path="res://scenes/game_object/basic_enemy/pillow/pillow.tscn" id="1_hmnjy"]
+
+[node name="Pillow" instance=ExtResource("1_hmnjy")]
+
+[node name="StateMachineComponent" parent="." index="2" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Idle")

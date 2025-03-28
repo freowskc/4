@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=8 format=3 uid="uid://dg568xapi6qgx"]
+
+[ext_resource type="Script" path="res://scenes/inventory/inventory_data.gd" id="1_tx6gd"]
+[ext_resource type="Script" path="res://scenes/inventory/slot_data.gd" id="2_rbqj1"]
+[ext_resource type="Resource" uid="uid://b6doeyte3glgm" path="res://scenes/item/items/sword.tres" id="3_psl5b"]
+[ext_resource type="Resource" uid="uid://cfwsaw0lrtw0o" path="res://scenes/item/items/poke.tres" id="4_gdkjs"]
+
+[sub_resource type="Resource" id="Resource_mwuc7"]
+script = ExtResource("2_rbqj1")
+item_data = ExtResource("3_psl5b")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_markp"]
+script = ExtResource("2_rbqj1")
+item_data = ExtResource("3_psl5b")
+quantity = 4
+
+[sub_resource type="Resource" id="Resource_1uhtw"]
+script = ExtResource("2_rbqj1")
+item_data = ExtResource("4_gdkjs")
+quantity = 1
+
+[resource]
+script = ExtResource("1_tx6gd")
+slot_datas = Array[ExtResource("2_rbqj1")]([null, null, SubResource("Resource_mwuc7"), null, SubResource("Resource_markp"), null, SubResource("Resource_1uhtw"), null, null])

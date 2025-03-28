@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b6doeyte3glgm"]
+
+[ext_resource type="Script" path="res://scenes/item/item_data.gd" id="1_13xwu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dd7w3"]
+load_path = "res://.godot/imported/weapons.png-c0e19090a5aebf838fa220d3c324fd38.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7x0m"]
+atlas = SubResource("CompressedTexture2D_dd7w3")
+region = Rect2(0, 0, 24, 24)
+
+[resource]
+script = ExtResource("1_13xwu")
+name = "Sword"
+description = "mediocre sword"
+stackable = true
+texture = SubResource("AtlasTexture_d7x0m")
+attack = 3
+defense = 4
+health = 2
+attack_speed = 10

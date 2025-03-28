@@ -1,0 +1,14 @@
+Node2D
+TextureButton
+Button
+VBoxContainer
+AudioStreamPlayer
+Sprite2D
+Node
+AnimationPlayer
+ReceiverComponent2
+StateMachine2
+CollisionShape2D
+CharacterBody2D
+HBoxContainer
+Control

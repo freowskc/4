@@ -1,0 +1,127 @@
+[gd_scene load_steps=26 format=3 uid="uid://dj8ffvqulh7m4"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7d7jh"]
+[ext_resource type="PackedScene" uid="uid://dbhti4rwpkth8" path="res://scenes/ui/arena_time_ui.tscn" id="1_qf7un"]
+[ext_resource type="PackedScene" uid="uid://y1i3iidd6taw" path="res://scenes/manager/arena_time_manager.tscn" id="2_133vt"]
+[ext_resource type="Shader" path="res://scenes/main/scroll.gdshader" id="2_ko5ut"]
+[ext_resource type="Script" path="res://scenes/main/bg_3.gd" id="3_lbnn1"]
+[ext_resource type="PackedScene" uid="uid://r1jdi0eveocl" path="res://scenes/manager/enemy_manager.tscn" id="3_ujf4l"]
+[ext_resource type="Texture2D" uid="uid://bhslthmrm0a0y" path="res://scenes/main/movingBG1.png" id="3_yn0cw"]
+[ext_resource type="Script" path="res://scenes/main/sprite_2d.gd" id="4_0eiv7"]
+[ext_resource type="PackedScene" uid="uid://3blvonxcc2sa" path="res://scenes/manager/drop_manager.tscn" id="4_w75r7"]
+[ext_resource type="Texture2D" uid="uid://mmyqftlde75k" path="res://scenes/main/bg4.png" id="5_l7f8s"]
+[ext_resource type="PackedScene" uid="uid://dfux5vo7xlllq" path="res://scenes/game_object/player/pigman/pigman.tscn" id="7_g55fu"]
+[ext_resource type="PackedScene" uid="uid://h6wq17nphmwe" path="res://scenes/game_object/basic_enemy/rogue/rogue.tscn" id="7_t0fd1"]
+[ext_resource type="PackedScene" uid="uid://cup7nrj6xgw6" path="res://scenes/game_object/basic_enemy/fairy/fairy.tscn" id="7_uviqg"]
+[ext_resource type="PackedScene" uid="uid://coemsiygv7ik" path="res://scenes/game_object/player/blue/blue.tscn" id="9_b40t4"]
+[ext_resource type="PackedScene" uid="uid://k5dgorra87l0" path="res://scenes/game_object/basic_enemy/poopman/poopman.tscn" id="9_flnvf"]
+[ext_resource type="PackedScene" uid="uid://cxafv6gyu78ri" path="res://scenes/inventory/inventory.tscn" id="11_o85n5"]
+[ext_resource type="PackedScene" uid="uid://cjtn7ksb8yle5" path="res://scenes/manager/player_manager.tscn" id="11_s8g76"]
+[ext_resource type="Resource" uid="uid://dg568xapi6qgx" path="res://scenes/test_inv.tres" id="12_0ltsr"]
+[ext_resource type="Resource" uid="uid://wpucl3ej5x3b" path="res://scenes/test_inv2.tres" id="12_1coyr"]
+[ext_resource type="Script" path="res://scenes/inventory/inventory_interface.gd" id="13_2tvim"]
+[ext_resource type="PackedScene" uid="uid://cyp8qgriu4cbf" path="res://scenes/game_object/player/priest/priest.tscn" id="14_kbtkr"]
+[ext_resource type="PackedScene" uid="uid://ckobdusy62qce" path="res://scenes/inventory/slot.tscn" id="15_yjynp"]
+[ext_resource type="Texture2D" uid="uid://cufmrs73vgmdb" path="res://scenes/main/Sprite-0010.png" id="18_hjmwh"]
+[ext_resource type="PackedScene" uid="uid://yptqg51mnh0c" path="res://scenes/tetris/tetrisboard.tscn" id="24_inwgv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p48sg"]
+shader = ExtResource("2_ko5ut")
+shader_parameter/speed = 0.1
+
+[node name="Main" type="Node"]
+script = ExtResource("1_7d7jh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_p48sg")
+position = Vector2(203, 271)
+scale = Vector2(1.94531, 2.22656)
+texture = ExtResource("3_yn0cw")
+script = ExtResource("4_0eiv7")
+
+[node name="Bg3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(207, 253)
+scale = Vector2(1, 1.32708)
+texture = ExtResource("5_l7f8s")
+script = ExtResource("3_lbnn1")
+
+[node name="Sprite-0010" type="Sprite2D" parent="."]
+position = Vector2(192.625, 84)
+scale = Vector2(2.60967, 1.99554)
+texture = ExtResource("18_hjmwh")
+
+[node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("1_qf7un")]
+arena_time_manager = NodePath("../ArenaTimeManager")
+
+[node name="ArenaTimeManager" parent="." instance=ExtResource("2_133vt")]
+
+[node name="EnemyManager" parent="." instance=ExtResource("3_ujf4l")]
+position = Vector2(0, 187)
+basic_enemy_scene_1 = ExtResource("9_flnvf")
+basic_enemy_scene_3 = ExtResource("7_uviqg")
+basic_enemy_scene_4 = ExtResource("7_t0fd1")
+
+[node name="DropManager" parent="." instance=ExtResource("4_w75r7")]
+
+[node name="PlayerManager" parent="." instance=ExtResource("11_s8g76")]
+position = Vector2(109, 462)
+basic_player_scene_1 = ExtResource("7_g55fu")
+basic_player_scene_2 = ExtResource("9_b40t4")
+basic_player_scene_3 = ExtResource("14_kbtkr")
+inventory_data_1 = ExtResource("12_0ltsr")
+inventory_data_2 = ExtResource("12_1coyr")
+inventory_data_3 = ExtResource("12_1coyr")
+inventory_data_4 = ExtResource("12_0ltsr")
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+size_flags_vertical = 0
+script = ExtResource("13_2tvim")
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("15_yjynp")]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="UI/InventoryInterface"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+columns = 4
+
+[node name="PlayerInventory" parent="UI/InventoryInterface/GridContainer" instance=ExtResource("11_o85n5")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PlayerInventory2" parent="UI/InventoryInterface/GridContainer" instance=ExtResource("11_o85n5")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PlayerInventory3" parent="UI/InventoryInterface/GridContainer" instance=ExtResource("11_o85n5")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="PlayerInventory4" parent="UI/InventoryInterface/GridContainer" instance=ExtResource("11_o85n5")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Node2D" parent="." instance=ExtResource("24_inwgv")]
+visible = false

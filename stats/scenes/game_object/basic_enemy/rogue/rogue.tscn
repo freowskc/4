@@ -1,0 +1,254 @@
+[gd_scene load_steps=22 format=3 uid="uid://h6wq17nphmwe"]
+
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/rogue/rogue.gd" id="1_balql"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/base_unit/StateMachine.gd" id="2_2vtvb"]
+[ext_resource type="Resource" uid="uid://cgcq5rx3po7d7" path="res://scenes/game_object/player/priest/prieststat.tres" id="2_j8vd2"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="3_7bhs5"]
+[ext_resource type="Texture2D" uid="uid://dmhudn2mnildp" path="res://scenes/game_object/basic_enemy/rogue/miniboss1.png" id="3_obk62"]
+[ext_resource type="Script" path="res://receiver_component_2.gd" id="4_u0x3n"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/rogue/node.gd" id="5_gwfu1"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/rogue/rogue_attack.gd" id="6_310cd"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/rogue/rogue_get_dmg.gd" id="7_caux4"]
+[ext_resource type="PackedScene" uid="uid://esxoqn07bwbk" path="res://scenes/game_object/dmgnumber/dmg_popup.tscn" id="8_2viii"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/rogue/rogue_charge.gd" id="8_jeau0"]
+[ext_resource type="AudioStream" uid="uid://dthfc5a5v055p" path="res://scenes/game_object/basic_enemy/rogue/hitHurt.wav" id="12_7heda"]
+[ext_resource type="PackedScene" uid="uid://c14kea16qnnef" path="res://scenes/game_object/dmgnumber/damage_number.tscn" id="12_wc6nc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygqbs"]
+size = Vector2(75, 268)
+
+[sub_resource type="Animation" id="Animation_dkq6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, -147)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jw042"]
+resource_name = "attack"
+length = 0.3
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, -147), Vector2(4, -143), Vector2(4, -147), Vector2(4, -143), Vector2(4, -147), Vector2(4, -143), Vector2(4, -147)]
+}
+
+[sub_resource type="Animation" id="Animation_1cfup"]
+resource_name = "charge"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1tssf"]
+resource_name = "get_dmg"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666, 0.1334, 0.2, 0.2664),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, -147), Vector2(7, -147), Vector2(4, -147), Vector2(7, -147), Vector2(4, -147)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_58ad5"]
+resource_name = "get_dmg2"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(4, -147), Vector2(-28, -142), Vector2(16, -121), Vector2(-24, -148), Vector2(15, -143), Vector2(4, -147), Vector2(-28, -142)]
+}
+
+[sub_resource type="Animation" id="Animation_hu2jl"]
+resource_name = "idle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vthdv"]
+_data = {
+"RESET": SubResource("Animation_dkq6r"),
+"attack": SubResource("Animation_jw042"),
+"charge": SubResource("Animation_1cfup"),
+"get_dmg": SubResource("Animation_1tssf"),
+"get_dmg2": SubResource("Animation_58ad5"),
+"idle": SubResource("Animation_hu2jl")
+}
+
+[node name="Rogue" type="CharacterBody2D"]
+script = ExtResource("1_balql")
+stat = ExtResource("2_j8vd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -134)
+shape = SubResource("RectangleShape2D_ygqbs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -147)
+texture = ExtResource("3_obk62")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_vthdv")
+}
+
+[node name="StateMachine2" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_2vtvb")
+initial_state = NodePath("RogueIdle")
+
+[node name="RogueIdle" type="Node" parent="StateMachine2"]
+script = ExtResource("5_gwfu1")
+state_type = "idle"
+
+[node name="RogueAttack" type="Node" parent="StateMachine2"]
+script = ExtResource("6_310cd")
+state_type = "attack"
+
+[node name="RogueGetDMG" type="Node" parent="StateMachine2"]
+script = ExtResource("7_caux4")
+state_type = "get_dmg"
+
+[node name="RogueCharge" type="Node" parent="StateMachine2"]
+script = ExtResource("8_jeau0")
+state_type = "charge"
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_7bhs5")]
+position = Vector2(-4, -239)
+max_health = 100.0
+
+[node name="ReceiverComponent2" type="Node" parent="." node_paths=PackedStringArray("state_machine_component", "state", "health_component")]
+script = ExtResource("4_u0x3n")
+state_machine_component = NodePath("../StateMachine2")
+state = NodePath("../StateMachine2/RogueGetDMG")
+health_component = NodePath("../HealthComponent")
+damage_popup = ExtResource("8_2viii")
+damage_popup2 = ExtResource("12_wc6nc")
+
+[node name="sfx_attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_7heda")
+volume_db = -10.0

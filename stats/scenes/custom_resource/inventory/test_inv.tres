@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="InventoryResource" load_steps=20 format=3 uid="uid://cyqossvtij5tj"]
+
+[ext_resource type="Script" path="res://scenes/custom_resource/inventory/inventory_res.gd" id="1_1gtaq"]
+[ext_resource type="Texture2D" uid="uid://db6bab72cyl7t" path="res://scenes/custom_resource/entity/ryu/state_on/on1.png" id="2_gyxdg"]
+[ext_resource type="Resource" uid="uid://b8s7ietowlylt" path="res://scenes/custom_resource/entity/ryu/state_on/ryu_idle_on.tres" id="2_kagv4"]
+[ext_resource type="Script" path="res://scenes/custom_resource/inventory/slot_res.gd" id="3_1be8m"]
+[ext_resource type="Script" path="res://scenes/custom_resource/entity/part_res.gd" id="3_bs8ej"]
+[ext_resource type="Resource" uid="uid://c5hb0lw7dr265" path="res://scenes/custom_resource/entity/ryu/signal/sig_ryu_idle_enter.tres" id="4_na7kf"]
+[ext_resource type="Resource" uid="uid://cxes6n5f2vufn" path="res://scenes/custom_resource/entity/ryu/state_to/ryu_idle_to.tres" id="5_tjt40"]
+[ext_resource type="Texture2D" uid="uid://cvrv66jdhb4jr" path="res://scenes/custom_resource/entity/ryu/signal/sig1.png" id="8_xkhku"]
+[ext_resource type="Resource" uid="uid://knq322mnv0jq" path="res://scenes/custom_resource/entity/ryu/signal/sig_char_timer.tres" id="9_kf6qt"]
+[ext_resource type="Resource" uid="uid://dtvjkug5ugyf1" path="res://scenes/custom_resource/entity/ryu/state_to/ryu_wander_to.tres" id="10_ti67x"]
+
+[sub_resource type="Resource" id="Resource_a101m"]
+script = ExtResource("3_bs8ej")
+icon = ExtResource("2_gyxdg")
+type = 1
+signal_name = "-"
+on_state = "rogue_idle"
+to_state = "-"
+description = "on rogue being in idle state"
+
+[sub_resource type="Resource" id="Resource_f6met"]
+script = ExtResource("3_1be8m")
+part_data = SubResource("Resource_a101m")
+
+[sub_resource type="Resource" id="Resource_wnof2"]
+resource_local_to_scene = true
+script = ExtResource("3_1be8m")
+part_data = ExtResource("2_kagv4")
+
+[sub_resource type="Resource" id="Resource_ki2qw"]
+script = ExtResource("3_1be8m")
+part_data = ExtResource("4_na7kf")
+
+[sub_resource type="Resource" id="Resource_inyus"]
+script = ExtResource("3_1be8m")
+part_data = ExtResource("5_tjt40")
+
+[sub_resource type="Resource" id="Resource_gb7ht"]
+script = ExtResource("3_bs8ej")
+icon = ExtResource("8_xkhku")
+type = 0
+signal_name = "char_idle_enter"
+on_state = "-"
+to_state = "-"
+description = "emit signal when
+character enter idle state"
+
+[sub_resource type="Resource" id="Resource_81mof"]
+script = ExtResource("3_1be8m")
+part_data = SubResource("Resource_gb7ht")
+
+[sub_resource type="Resource" id="Resource_mvrlo"]
+script = ExtResource("3_1be8m")
+part_data = ExtResource("9_kf6qt")
+
+[sub_resource type="Resource" id="Resource_b8mjs"]
+script = ExtResource("3_1be8m")
+part_data = ExtResource("10_ti67x")
+
+[resource]
+script = ExtResource("1_1gtaq")
+slot_reses = Array[ExtResource("3_1be8m")]([SubResource("Resource_f6met"), null, null, null, null, SubResource("Resource_wnof2"), null, null, null, SubResource("Resource_ki2qw"), null, null, SubResource("Resource_inyus"), null, SubResource("Resource_81mof"), null, null, SubResource("Resource_mvrlo"), null, SubResource("Resource_b8mjs"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])

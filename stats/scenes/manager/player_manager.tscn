@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjtn7ksb8yle5"]
+
+[ext_resource type="Script" path="res://scenes/manager/player_manager.gd" id="1_7wviu"]
+[ext_resource type="PackedScene" uid="uid://bvruyx74t1pbc" path="res://scenes/component/enemy_marker_p.tscn" id="1_buwgk"]
+[ext_resource type="Script" path="res://scenes/manager/PositionComponent.gd" id="2_nwwsq"]
+
+[node name="PlayerManager" type="Node2D"]
+script = ExtResource("1_7wviu")
+
+[node name="PositionComponent" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(15, 15)
+script = ExtResource("2_nwwsq")
+
+[node name="EnemyMarkerP2" parent="PositionComponent" instance=ExtResource("1_buwgk")]
+position = Vector2(96, 7)
+unit_position = 2
+
+[node name="EnemyMarkerP4" parent="PositionComponent" instance=ExtResource("1_buwgk")]
+position = Vector2(27, 7)
+unit_position = 4
+
+[node name="EnemyMarkerP1" parent="PositionComponent" instance=ExtResource("1_buwgk")]
+position = Vector2(132, 7)
+unit_position = 1
+
+[node name="EnemyMarkerP3" parent="PositionComponent" instance=ExtResource("1_buwgk")]
+position = Vector2(61, 7)
+unit_position = 3
+
+[node name="PlayerPlaceHolder" type="Node" parent="."]
+unique_name_in_owner = true

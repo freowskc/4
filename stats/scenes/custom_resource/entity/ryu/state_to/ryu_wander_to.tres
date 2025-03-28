@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PartResource" load_steps=3 format=3 uid="uid://dtvjkug5ugyf1"]
+
+[ext_resource type="Texture2D" uid="uid://cvbqp8rrhfk0r" path="res://scenes/custom_resource/entity/ryu/state_to/to1.png" id="1_3j3wy"]
+[ext_resource type="Script" path="res://scenes/custom_resource/entity/part_res.gd" id="1_uhfnk"]
+
+[resource]
+script = ExtResource("1_uhfnk")
+icon = ExtResource("1_3j3wy")
+type = 2
+signal_name = "-"
+on_state = "-"
+to_state = "rogue_wander"
+description = "-"

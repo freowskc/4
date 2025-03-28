@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt0bufvnq3oe8"]
+
+[ext_resource type="PackedScene" uid="uid://jk6tp15llriu" path="res://scenes/game_object/basic_enemy/base_unit/base_unit.tscn" id="1_vu6ur"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/gengger/gengger.gd" id="2_7r6qc"]
+[ext_resource type="Texture2D" uid="uid://bmpxys3j6s0kk" path="res://scenes/game_object/basic_enemy/gengger/gengger.png" id="3_lmslq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5xwo"]
+size = Vector2(16.75, 38)
+
+[sub_resource type="Animation" id="Animation_yhdhw"]
+resource_name = "wander"
+length = 0.40001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_u268v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1u7qn"]
+resource_name = "chasing"
+length = 0.20001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4kekb"]
+_data = {
+"RESET": SubResource("Animation_u268v"),
+"chasing": SubResource("Animation_1u7qn"),
+"wander": SubResource("Animation_yhdhw")
+}
+
+[node name="BaseUnit" instance=ExtResource("1_vu6ur")]
+script = ExtResource("2_7r6qc")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.625, -19)
+shape = SubResource("RectangleShape2D_o5xwo")
+
+[node name="StateMachineComponent" parent="." index="1" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4kekb")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="5"]
+texture = ExtResource("3_lmslq")
+offset = Vector2(12, -24)
+hframes = 4

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h8nt1nlnt0qi"]
+
+[ext_resource type="Script" path="res://receiver_component_2.gd" id="1_850sx"]
+
+[node name="ReceiverComponent2" type="Node"]
+script = ExtResource("1_850sx")

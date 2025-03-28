@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SignalTemp" load_steps=2 format=3 uid="uid://cq2psptrdk74w"]
+
+[ext_resource type="Script" path="res://scenes/custom_resource/signal_events.gd" id="1_movkm"]
+
+[resource]
+script = ExtResource("1_movkm")
+signals = Array[String](["enemy_spawn", "enemy_die", "enemy_die_all", "char_timer", "char_idle_enter", "char_idle_exit", "char_attack_enter", "char_attack_exit", "char_crit_enter", "char_crit_exit", "char_wander_enter", "char_wander_exit", "gengger_wander_exit", "gengger_wander_enter", "gengger_idle_enter"])

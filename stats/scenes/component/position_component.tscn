@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://brwbtddnlemwn"]
+
+[ext_resource type="Script" path="res://scenes/manager/PositionComponent.gd" id="1_riqt1"]
+[ext_resource type="PackedScene" uid="uid://bvruyx74t1pbc" path="res://scenes/component/enemy_marker_p.tscn" id="2_urih5"]
+
+[node name="PositionComponent" type="Node2D"]
+position = Vector2(155, 44)
+script = ExtResource("1_riqt1")
+
+[node name="EnemyMarkerP2" parent="." instance=ExtResource("2_urih5")]
+position = Vector2(136, 92)
+unit_position = 2
+
+[node name="EnemyMarkerP4" parent="." instance=ExtResource("2_urih5")]
+position = Vector2(166, 23)
+unit_position = 4
+
+[node name="EnemyMarkerP1" parent="." instance=ExtResource("2_urih5")]
+position = Vector2(145, 50)
+unit_position = 1
+
+[node name="EnemyMarkerP3" parent="." instance=ExtResource("2_urih5")]
+position = Vector2(70, 51)
+unit_position = 3

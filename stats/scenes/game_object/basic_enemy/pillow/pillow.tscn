@@ -1,0 +1,229 @@
+[gd_scene load_steps=21 format=3 uid="uid://cv4uktrp44a2u"]
+
+[ext_resource type="PackedScene" uid="uid://bxlmg5o8hc2c1" path="res://scenes/component/state_machine_component.tscn" id="1_bvmh1"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/pillow.gd" id="1_l1dpv"]
+[ext_resource type="Resource" uid="uid://cgcq5rx3po7d7" path="res://scenes/game_object/player/priest/prieststat.tres" id="2_hntqc"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="2_i0hig"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/sleep.gd" id="2_unqt4"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/WakeUp.gd" id="3_42apw"]
+[ext_resource type="Texture2D" uid="uid://cxnby0khbwlqe" path="res://scenes/game_object/basic_enemy/pillow/pillow.png" id="3_d4pok"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/Idle.gd" id="4_d7nba"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/Attack.gd" id="7_x0gv0"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/pillow/GetDMG.gd" id="8_daj0i"]
+[ext_resource type="PackedScene" uid="uid://dkoo3i3djfh0q" path="res://scenes/component/receiver_component.tscn" id="11_f7wxh"]
+[ext_resource type="Script" path="res://progress_bar_component.gd" id="12_64jkt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o250u"]
+size = Vector2(34, 26)
+
+[sub_resource type="Animation" id="Animation_820jd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_87eud"]
+resource_name = "attack"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [20, 21]
+}
+
+[sub_resource type="Animation" id="Animation_08mtg"]
+resource_name = "get_dmg"
+length = 0.300001
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-11, 0), Vector2(-13, 0), Vector2(-11, 0), Vector2(-13, 0), Vector2(-11, 0), Vector2(-13, 0), Vector2(-11, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.08, 0.13, 0.18, 0.23),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ebuxy"]
+resource_name = "idle"
+length = 0.70001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_rhdxm"]
+resource_name = "sleep"
+length = 0.70001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_kbdxu"]
+resource_name = "wake_up"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gq6fa"]
+_data = {
+"RESET": SubResource("Animation_820jd"),
+"attack": SubResource("Animation_87eud"),
+"get_dmg": SubResource("Animation_08mtg"),
+"idle": SubResource("Animation_ebuxy"),
+"sleep": SubResource("Animation_rhdxm"),
+"wake_up": SubResource("Animation_kbdxu")
+}
+
+[node name="Pillow" type="CharacterBody2D"]
+script = ExtResource("1_l1dpv")
+stat = ExtResource("2_hntqc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -13)
+shape = SubResource("RectangleShape2D_o250u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_d4pok")
+offset = Vector2(1.335, -11)
+hframes = 5
+vframes = 5
+
+[node name="StateMachineComponent" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("1_bvmh1")]
+initial_state = NodePath("Sleep")
+
+[node name="Sleep" type="Node" parent="StateMachineComponent"]
+script = ExtResource("2_unqt4")
+state_type = "sleep"
+
+[node name="WakeUp" type="Node" parent="StateMachineComponent"]
+script = ExtResource("3_42apw")
+state_type = "wake_up"
+
+[node name="Idle" type="Node" parent="StateMachineComponent"]
+script = ExtResource("4_d7nba")
+state_type = "idle"
+
+[node name="Attack" type="Node" parent="StateMachineComponent"]
+script = ExtResource("7_x0gv0")
+state_type = "attack"
+
+[node name="GetDMG" type="Node" parent="StateMachineComponent"]
+script = ExtResource("8_daj0i")
+state_type = "get_dmg"
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("2_i0hig")]
+health_bar = NodePath("../ProgressBarComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_gq6fa")
+}
+
+[node name="ReceiverComponent" parent="." node_paths=PackedStringArray("state_machine_component", "state", "health_component") instance=ExtResource("11_f7wxh")]
+state_machine_component = NodePath("../StateMachineComponent")
+state = NodePath("../StateMachineComponent/GetDMG")
+health_component = NodePath("../HealthComponent")
+
+[node name="ProgressBarComponent" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+script = ExtResource("12_64jkt")

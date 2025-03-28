@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://jk6tp15llriu"]
+
+[ext_resource type="PackedScene" uid="uid://bxlmg5o8hc2c1" path="res://scenes/component/state_machine_component.tscn" id="2_6eoei"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="3_qqr5j"]
+
+[node name="BaseUnit" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="StateMachineComponent" parent="." instance=ExtResource("2_6eoei")]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_qqr5j")]
+health_bar = NodePath("../ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0

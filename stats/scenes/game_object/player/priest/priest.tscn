@@ -1,0 +1,195 @@
+[gd_scene load_steps=18 format=3 uid="uid://cyp8qgriu4cbf"]
+
+[ext_resource type="Texture2D" uid="uid://cs0bxoifwiyth" path="res://scenes/autoload/walkpriest.png" id="1_1hmgb"]
+[ext_resource type="Script" path="res://scenes/game_object/player/priest/priest.gd" id="1_sjii3"]
+[ext_resource type="Resource" uid="uid://cgcq5rx3po7d7" path="res://scenes/game_object/player/priest/prieststat.tres" id="2_ltn61"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/base_unit/StateMachine.gd" id="2_ygmvr"]
+[ext_resource type="Script" path="res://scenes/game_object/player/priest/priest_walk.gd" id="4_l4rix"]
+[ext_resource type="Script" path="res://scenes/game_object/player/priest/priest_attack.gd" id="5_e0wua"]
+[ext_resource type="Script" path="res://scenes/game_object/player/priest/priest_get_dmg.gd" id="6_y2382"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="8_bnahq"]
+[ext_resource type="Script" path="res://receiver_component_2.gd" id="9_0fk6h"]
+[ext_resource type="PackedScene" uid="uid://esxoqn07bwbk" path="res://scenes/game_object/dmgnumber/dmg_popup.tscn" id="10_5njic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbnf6"]
+size = Vector2(26, 39)
+
+[sub_resource type="Animation" id="Animation_n57kx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7x7g1"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_rtet7"]
+resource_name = "get_dmg"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_k337d"]
+resource_name = "idle"
+length = 0.3
+
+[sub_resource type="Animation" id="Animation_xwn1v"]
+resource_name = "walking"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -24), Vector2(0, -20), Vector2(0, -24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8g2b7"]
+_data = {
+"RESET": SubResource("Animation_n57kx"),
+"attack": SubResource("Animation_7x7g1"),
+"get_dmg": SubResource("Animation_rtet7"),
+"idle": SubResource("Animation_k337d"),
+"walking": SubResource("Animation_xwn1v")
+}
+
+[node name="Priest" type="CharacterBody2D"]
+script = ExtResource("1_sjii3")
+stat = ExtResource("2_ltn61")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1hmgb")
+offset = Vector2(0, -24)
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -19.5)
+shape = SubResource("RectangleShape2D_lbnf6")
+
+[node name="StateMachine2" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ygmvr")
+initial_state = NodePath("PriestWalk")
+
+[node name="PriestWalk" type="Node" parent="StateMachine2"]
+script = ExtResource("4_l4rix")
+state_type = "priestwalk"
+
+[node name="PriestAttack" type="Node" parent="StateMachine2"]
+script = ExtResource("5_e0wua")
+state_type = "priestattack"
+
+[node name="PriestGetDMG" type="Node" parent="StateMachine2"]
+script = ExtResource("6_y2382")
+state_type = "get_dmg"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8g2b7")
+}
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_bnahq")]
+
+[node name="ReceiverComponent2" type="Node" parent="." node_paths=PackedStringArray("state_machine_component", "state", "health_component")]
+script = ExtResource("9_0fk6h")
+state_machine_component = NodePath("../StateMachine2")
+state = NodePath("../StateMachine2/PriestGetDMG")
+health_component = NodePath("../HealthComponent")
+damage_popup = ExtResource("10_5njic")

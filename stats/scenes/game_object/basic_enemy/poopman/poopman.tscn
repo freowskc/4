@@ -1,0 +1,182 @@
+[gd_scene load_steps=20 format=3 uid="uid://k5dgorra87l0"]
+
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/poopman/poopman.gd" id="1_4b4q1"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/base_unit/StateMachine.gd" id="1_15ucg"]
+[ext_resource type="Script" path="res://receiver_component_2.gd" id="2_b6pfo"]
+[ext_resource type="Resource" uid="uid://cgcq5rx3po7d7" path="res://scenes/game_object/player/priest/prieststat.tres" id="2_d2ks2"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="3_ayxsm"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/poopman/poopman_idle.gd" id="3_ey6i0"]
+[ext_resource type="Texture2D" uid="uid://cm8m8hovgsfic" path="res://scenes/game_object/basic_enemy/poopman/poopman.png" id="4_e72yb"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/poopman/poop_man_charge.gd" id="4_gb2im"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/poopman/poop_man_attack.gd" id="5_oprup"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/poopman/poop_man_get_dmg.gd" id="6_4eo6f"]
+[ext_resource type="PackedScene" uid="uid://c14kea16qnnef" path="res://scenes/game_object/dmgnumber/damage_number.tscn" id="10_e6r4p"]
+[ext_resource type="AudioStream" uid="uid://dthfc5a5v055p" path="res://scenes/game_object/basic_enemy/rogue/hitHurt.wav" id="12_swby7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0f8rh"]
+size = Vector2(59, 109)
+
+[sub_resource type="Animation" id="Animation_h8lmf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_remmg"]
+resource_name = "attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_acoue"]
+resource_name = "charge"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(2, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ocavu"]
+resource_name = "get_dmg"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(6, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_2xqj2"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lda54"]
+_data = {
+"RESET": SubResource("Animation_h8lmf"),
+"attack": SubResource("Animation_remmg"),
+"charge": SubResource("Animation_acoue"),
+"get_dmg": SubResource("Animation_ocavu"),
+"idle": SubResource("Animation_2xqj2")
+}
+
+[node name="Poopman" type="CharacterBody2D"]
+script = ExtResource("1_4b4q1")
+stat = ExtResource("2_d2ks2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -54.5)
+shape = SubResource("RectangleShape2D_0f8rh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_e72yb")
+offset = Vector2(25, -46)
+hframes = 7
+
+[node name="StateMachine2" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_15ucg")
+initial_state = NodePath("PoopManIdle")
+
+[node name="PoopManIdle" type="Node" parent="StateMachine2"]
+script = ExtResource("3_ey6i0")
+state_type = "idle"
+
+[node name="PoopManCharge" type="Node" parent="StateMachine2"]
+script = ExtResource("4_gb2im")
+state_type = "charge"
+
+[node name="PoopManAttack" type="Node" parent="StateMachine2"]
+script = ExtResource("5_oprup")
+state_type = "attack"
+
+[node name="PoopManGetDMG" type="Node" parent="StateMachine2"]
+script = ExtResource("6_4eo6f")
+state_type = "get_dmg"
+
+[node name="ReceiverComponent2" type="Node" parent="." node_paths=PackedStringArray("state_machine_component", "state", "health_component")]
+script = ExtResource("2_b6pfo")
+state_machine_component = NodePath("../StateMachine2")
+state = NodePath("../StateMachine2/PoopManGetDMG")
+health_component = NodePath("../HealthComponent")
+damage_popup2 = ExtResource("10_e6r4p")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ayxsm")]
+position = Vector2(-4, -65)
+max_health = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_lda54")
+}
+
+[node name="sfx_attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_swby7")

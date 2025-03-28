@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c1vah307qyuc3"]
+
+[node name="ProgressbarTimerComponent" type="Timer"]

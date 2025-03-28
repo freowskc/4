@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://elago7d3lhe1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7uv3n"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jnl0"]
+bg_color = Color(0.74902, 0.807843, 0.447059, 1)
+
+[node name="ProgressbarDmgCompenent" type="ProgressBar"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7uv3n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6jnl0")
+show_percentage = false

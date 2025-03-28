@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfl316tfqks2j"]
+
+[ext_resource type="PackedScene" uid="uid://bxlmg5o8hc2c1" path="res://scenes/component/state_machine_component.tscn" id="1_y8frr"]
+[ext_resource type="Script" path="res://scenes/game_object/basic_enemy/gengger/wander.gd" id="2_grdkm"]
+[ext_resource type="PackedScene" uid="uid://c2bkhyluhofrn" path="res://scenes/component/health_component.tscn" id="3_rwgre"]
+[ext_resource type="Texture2D" uid="uid://bmpxys3j6s0kk" path="res://scenes/game_object/basic_enemy/gengger/gengger.png" id="4_svoth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfmam"]
+size = Vector2(20, 37)
+
+[sub_resource type="Animation" id="Animation_we2k6"]
+resource_name = "wander"
+length = 0.40001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_xuupt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxorn"]
+_data = {
+"RESET": SubResource("Animation_xuupt"),
+"wander": SubResource("Animation_we2k6")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18.5)
+shape = SubResource("RectangleShape2D_jfmam")
+
+[node name="StateMachineComponent" parent="." instance=ExtResource("1_y8frr")]
+
+[node name="GengGerWander" type="Node" parent="StateMachineComponent"]
+script = ExtResource("2_grdkm")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("health_bar") instance=ExtResource("3_rwgre")]
+health_bar = NodePath("../ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_hxorn")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_svoth")
+offset = Vector2(10.958, -22.985)
+hframes = 4

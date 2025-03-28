@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2bkhyluhofrn"]
+
+[ext_resource type="Script" path="res://scenes/component/health_component.gd" id="1_5nkw1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ctjsv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_macqx"]
+bg_color = Color(0.333333, 0.627451, 0.286275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eevou"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5e2oa"]
+bg_color = Color(0.74902, 0.807843, 0.447059, 1)
+
+[node name="HealthComponent" type="Node2D"]
+script = ExtResource("1_5nkw1")
+
+[node name="progress_bar_health_component" type="ProgressBar" parent="."]
+z_index = 1
+offset_left = -8.0
+offset_top = -54.0
+offset_right = 16.0
+offset_bottom = -50.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_ctjsv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_macqx")
+show_percentage = false
+
+[node name="progress_bar_timer_component" type="Timer" parent="progress_bar_health_component"]
+
+[node name="progress_bar_dmg_component" type="ProgressBar" parent="progress_bar_health_component"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_eevou")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5e2oa")
+show_percentage = false
+
+[connection signal="timeout" from="progress_bar_health_component/progress_bar_timer_component" to="." method="_on_progress_bar_timer_component_timeout"]

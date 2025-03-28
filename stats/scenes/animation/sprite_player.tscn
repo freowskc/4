@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cabe37cytadtg"]
+
+[ext_resource type="Texture2D" uid="uid://b3bggla6uc5dm" path="res://scenes/game_object/ryu_sprites1.png" id="1_ly7tl"]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_ly7tl")
+offset = Vector2(6, -16)
+hframes = 12
+vframes = 2
+frame = 1
