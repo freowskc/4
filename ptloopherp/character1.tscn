@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b65lj5v84usnb"]
+
+[ext_resource type="Texture2D" uid="uid://ctwmkdhugdvxh" path="res://PC Computer - Loop Hero - Ratwolf.png" id="1_j7jwl"]
+
+[node name="character1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(387, 153)
+texture = ExtResource("1_j7jwl")
+hframes = 5
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
