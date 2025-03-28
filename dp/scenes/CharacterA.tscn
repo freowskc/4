@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4wlgj5bnhx5q"]
+
+[ext_resource type="Script" path="res://scenes/CharacterA.gd" id="1_7tnq3"]
+[ext_resource type="Texture2D" uid="uid://c1ixgadbxhpxn" path="res://chractersprite/characterA.png" id="2_rlkwb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 20.0
+
+[node name="CharacterA" type="CharacterBody2D"]
+collision_mask = 3
+script = ExtResource(  "1_7tnq3"  )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource(  "2_rlkwb"  )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+offset_left = -30.0
+offset_top = -50.0
+offset_right = 30.0
+offset_bottom = -40.0
+max_value = 100.0
+value = 100.0
+show_percentage = false
